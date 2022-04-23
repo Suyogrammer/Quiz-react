@@ -9,8 +9,7 @@ function App() {
   const [quesNum, setQuesNum] = useState(0);
   const [savedAns, setSavedAns] = useState([]);
   const [showList, setShowList] = useState(true);
-
-  let score = 0;
+  const [score, setScore] = useState(0);
 
   console.log(savedAns, "savedAns");
 
@@ -22,7 +21,7 @@ function App() {
     } else {
       for (let i in savedAns) {
         if (savedAns[i] == 1) {
-          score++;
+          setScore((prevScore) => prevScore + 1);
         }
       }
       console.log(score, "score");
@@ -57,12 +56,18 @@ function App() {
           `Your Score : ${score} of ${option.length}`
         )}
       </div>
-      <button className="btn" onClick={() => handlePrev()}>
-        Previous
-      </button>
-      <button className="btn" onClick={() => handleNext()}>
-        Next
-      </button>{" "}
+      {showList ? (
+        <div>
+          <button className="btn" onClick={() => handlePrev()}>
+            Previous
+          </button>
+          <button className="btn" onClick={() => handleNext()}>
+            Next
+          </button>
+        </div>
+      ) : (
+        <div>KEEP IT UP</div>
+      )}
     </div>
   );
 }
